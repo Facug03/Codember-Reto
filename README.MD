@@ -1,6 +1,6 @@
 # Codember Retos 💻
 
-Retos de [Codember](https://codember.dev/) hecho por midudev
+[Codember](https://codember.dev/) es una página de retos realizada por midudev
 
 
 
