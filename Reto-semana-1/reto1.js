@@ -717,31 +717,37 @@ psw:11133 loc:Canary
 fll:333 usr:@pheralb
 eme:pheralb@gmail.com`
 
-const allUsers = []
-let userIndex = 0
-
-users.split('\n').forEach(user => {
-  if (user !== '') {
-    if (typeof allUsers[userIndex] === 'undefined') {
-      allUsers[userIndex] = ''
+function isValidUser (users) {
+  const allUsers = []
+  let userIndex = 0
+  
+  users.split('\n').forEach(user => {
+    if (user !== '') {
+      if (typeof allUsers[userIndex] === 'undefined') {
+        allUsers[userIndex] = ''
+      }
+      allUsers[userIndex] = allUsers[userIndex] + ' ' + user
+    } else {
+      userIndex += 1
     }
-    allUsers[userIndex] = allUsers[userIndex] + ' ' + user
-  } else {
-    userIndex += 1
+  })
+  
+  let correctUsers = 0
+  let lastUser = ''
+  
+  allUsers.forEach(user => {
+    if(user.includes('usr') && user.includes('eme') && user.includes('psw') && user.includes('age') && user.includes('loc') && user.includes('fll') ) {
+      correctUsers += 1
+      lastUser = user
+    }
+  })
+
+  return {
+    correctUsers,
+    lastUser
   }
-})
+}
 
-let correctUsers = 0
-let lastUser = ''
+const answer = isValidUser(users)
 
-allUsers.forEach(user => {
-  if(user.includes('usr') && user.includes('eme') && user.includes('psw') && user.includes('age') && user.includes('loc') && user.includes('fll') ) {
-    correctUsers += 1
-    lastUser = user
-  }
-})
-
-correctUsers
-lastUser
-
-console.log(correctUsers, lastUser)
+console.log(answer)
